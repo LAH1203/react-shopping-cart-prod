@@ -8,4 +8,5 @@ export interface Props {
   setChecked: (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLElement>
   ) => void;
+  resetCheckedItems: () => void;
 }

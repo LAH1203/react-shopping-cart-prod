@@ -17,6 +17,7 @@ function CartItem({
   quantity,
   checked,
   setChecked,
+  resetCheckedItems,
 }: Props) {
   const { id, name, imageUrl } = product;
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function CartItem({
       .delete(accessToken, cartItemId)
       .then(res => {
         dispatch(cartActions.setCart(res));
+        resetCheckedItems();
       })
       .catch(error => {
         alert(CART_MESSAGE.FAIL_DELETE);

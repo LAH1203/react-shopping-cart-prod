@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import cartAPI from 'apis/cart';
 import { PayModal } from 'awesome-pay';
@@ -18,10 +18,6 @@ function CartContent({ cartItems }: Props) {
   const [checkedItems, setCheckedItems] = useState<Array<Cart['id']>>([]);
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setCheckedItems([]);
-  }, [cartItems.length]);
 
   const toggleShowModal = () => {
     setShowModal(prevState => !prevState);
@@ -72,6 +68,10 @@ function CartContent({ cartItems }: Props) {
       }
       return [...prevState, id];
     });
+  };
+
+  const resetCheckedItems = () => {
+    setCheckedItems([]);
   };
 
   const onClickCheckedDeleteButton = () => {
@@ -140,6 +140,7 @@ function CartContent({ cartItems }: Props) {
               quantity={quantity}
               checked={checkedItems.includes(String(id))}
               setChecked={onChangeChecked}
+              resetCheckedItems={resetCheckedItems}
               key={product.id}
             />
           ))
